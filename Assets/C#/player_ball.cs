@@ -20,13 +20,18 @@ public class player_ball : MonoBehaviour
     void Update()
     {
         score.text = (200f-ball.position.z).ToString();
-        if (Input.GetKey("a")) ball.AddForce(ballforce, 0f, 0f);
-        if (Input.GetKey("d")) ball.AddForce(-ballforce, 0f, 0f);
+        if (Input.GetKey(KeyCode.LeftArrow)) ball.AddForce(ballforce-1, 0f, 0f);
+        if (Input.GetKey(KeyCode.UpArrow)) ball.AddForce(0f, 0f, -ballforce);
+        if (Input.GetKey(KeyCode.DownArrow)) ball.AddForce(0f, 0f, ballforce);
+        if (Input.GetKey(KeyCode.RightArrow)) ball.AddForce(-ballforce+1, 0f, 0f);
        // if (Input.GetKey("a")) ball.AddForce(ballforce, 0f, 0f);
-        ball.AddForce(0f, 0f, -ballforce);
-        if (ball.position.y < 0)
+        
+        if (ball.position.y < 2)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if(ball.position.z<-200) {
+            score.text = "YOU WON";
         }
     }
 }
